@@ -100,7 +100,8 @@ defmodule Opencensus.Plug.Trace do
           "http.method" => conn.method,
           "http.path" => conn.request_path,
           "http.user_agent" => user_agent,
-          "http.url" => Plug.Conn.request_url(conn)
+          "http.url" => Plug.Conn.request_url(conn),
+          "span.kind" => "server"
 
           # TODO: How do we get this?
           # "http.route" => ""
