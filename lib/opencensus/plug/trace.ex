@@ -100,8 +100,7 @@ defmodule Opencensus.Plug.Trace do
           "http.method" => conn.method,
           "http.path" => conn.request_path,
           "http.user_agent" => user_agent,
-          "http.url" => Plug.Conn.request_url(conn),
-          "span.kind" => "server"
+          "http.url" => Plug.Conn.request_url(conn)
 
           # TODO: How do we get this?
           # "http.route" => ""
@@ -121,8 +120,10 @@ defmodule Opencensus.Plug.Trace do
           {status, msg} = span_status(conn, opts)
 
           :oc_trace.put_attribute("http.status_code", Integer.to_string(conn.status), span_ctx)
+          :oc_trace.put_attribute("span.kind", "SERVER", span_ctx)
 
           :oc_trace.set_status(status, msg, span_ctx)
+          :oc_trace.set_kind(:opencensus.span_kind_server(), span_ctx)
           :oc_trace.finish_span(span_ctx)
           :ocp.with_span_ctx(parent_span_ctx)
 

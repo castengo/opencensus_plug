@@ -48,7 +48,7 @@ defmodule Opencensus.Plug.MixProject do
   defp deps do
     [
       {:plug, "~> 1.6"},
-      {:opencensus, "~> 0.9"},
+      {:opencensus, git: "https://github.com/castengo/opencensus-erlang.git", branch: "master"},
 
       # Documentation
       {:ex_doc, ">= 0.0.0", only: [:docs]},
